@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leyendo Poema</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos exclusivos para la lectura enfocada */
+        .pantalla-lectura {
+            max-width: 600px;
+            margin: 80px auto;
+            padding: 0 20px;
+            text-align: left;
+        }
+        .btn-volver {
+            background: none;
+            border: none;
+            color: var(--color-oro);
+            cursor: pointer;
+            font-family: var(--fuente-interfaz);
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .titulo-lectura {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #1a1513;
+        }
+        .contenido-lectura {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            line-height: 2;
+            color: #2b2623;
+            white-space: pre-line;
+            margin-top: 40px;
+            border: none;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="pantalla-lectura">
+        <a href="#" class="btn-volver" onclick="window.close(); return false;">← Cerrar pestaña</a>
+        
+        <h1 id="poema-titulo" class="titulo-lectura">Cargando...</h1>
+        <div id="poema-categoria" class="meta-poema"></div>
+        
+        <article id="poema-contenido" class="contenido-lectura">
+            Espere un momento...
+        </article>
+    </main>
+
+    <script>
+        // Lógica para capturar el ID de la URL y buscar el poema
+        async function cargarPoemaIndividual() {
+            try {
+                // 1. Obtener el ID desde la URL (ej: poema.html?id=2)
+                const parametros = new URLSearchParams(window.location.search);
+                const idPoema = parseInt(parametros.get('id'));
+
+                // 2. Buscar en el archivo JSON
+                const respuesta = await fetch('./poemas.json');
+                const poemas = await respuesta.json();
+
+                const poemaEncontrado = poemas.find(p => p.id === idPoema);
+
+                if (poemaEncontrado) {
+                    // 3. Inyectar los datos en la página
+                    document.title = `${poemaEncontrado.titulo} | Mi Antología`;
+                    document.getElementById('poema-titulo').innerText = poemaEncontrado.titulo;
+                    document.getElementById('poema-categoria').innerText = poemaEncontrado.categoria;
+                    document.getElementById('poema-contenido').innerText = poemaEncontrado.contenido;
+                } else {
+                    document.getElementById('poema-titulo').innerText = "Poema no encontrado";
+                    document.getElementById('poema-contenido').innerText = "El poema que buscas no existe en el archivo.";
+                }
+            } catch (error) {
+                console.error("Error al cargar el poema:", error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', cargarPoemaIndividual);
+        const temaPadre = localStorage.getItem('tema');
+        if (temaPadre === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOCK POEMARIO | Poesias Completas</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Cargamos fuentes elegantes desde Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Menú de Navegación Elegante -->
+            <nav class="navbar">
+                    <div class="nav-logo">H.A.R.S / Antología</div>
+                    <div class="nav-derecha">
+                        <div class="nav-links">
+                            <a href="#" class="nav-link active" data-target="inicio">Inicio</a>
+                            <a href="#" class="nav-link" data-target="poemas">Poemas</a>
+                            <a href="#" class="nav-link" data-target="sobre-mi">El Autor</a>
+                        </div>
+                        <button id="btn-tema" class="btn-tema">🌙 Modo Oscuro</button>
+                    </div>
+                </nav>
+
+    <!-- SECCIÓN 1: PANTALLA DE INICIO (HERO) -->
+<section id="inicio" class="seccion-contenido active">
+        <div class="hero-container">
+            <div class="hero-overlay"></div> <div class="hero-texto">
+                <span class="hero-sub">Antología Personal</span>
+                <h1>Donde las palabras cobran vida</h1>
+                <p class="hero-frase">"La poesía no busca la belleza; la poesía encuentra lo que permanece oculto en el silencio."</p>
+                <button class="btn-elegante" onclick="irAPoemas()">Explorar Versos</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN 2: CATÁLOGO DE POEMAS -->
+    <section id="poemas" class="seccion-contenido container">
+        <div class="seccion-header">
+            <h2>El Archivo de Versos</h2>
+            <p>Explora más de cien composiciones ordenadas por emociones</p>
+            
+            <!-- Buscador y Filtros Profesionales -->
+            <div class="filtros-container">
+                <input type="text" id="buscador" placeholder="Buscar por título o palabra clave...">
+                <select id="filtro-categoria">
+                    <option value="todos">Todas las categorías</option>
+                    <option value="Crisis Existencial Juvenil">Crisis Existencial Juvenil</option>
+                    <option value="Vínculo Familiar">Vínculo Familiar</option>
+                    <option value="Introspección Urbana">Introspección Urbana</option>
+                    <option value="Romance Idealizado">Romance Idealizado</option>
+                    <option value="Desengaño Amoroso">Desengaño Amoroso</option>
+                    <option value="Identidad y Máscara">Identidad y Máscara</option>
+                    <option value="Dinámica Social">Dinámica Social</option>
+                    <option value="Nihilismo Colectivo">Nihilismo Colectivo</option>
+                    <option value="Poesía Gótica / Psique">Poesía Gótica / Psique</option>
+                    <option value="Nacional Peruana">Nacional Peruana</option>
+                    <option value="Picaresca / Sátira">Picaresca / Sátira</option>
+                    <option value="Elegía / Ausencia Materna">Elegía / Ausencia Materna</option>
+                    <option value="Amistad / Homenaje">Amistad / Homenaje</option>
+                    <option value="Fábula / Romance Humorístico">Fábula / Romance Humorístico</option>
+                    <option value="Fábula / Humor Infantil">Fábula / Humor Infantil</option>
+                    <option value="Meta-poesía / Arte Lírico">Meta-poesía / Arte Lírico</option>
+                    <option value="Desengaño / Traición">Desengaño / Traición</option>
+                    <option value="Sátira / Costumbrismo">Sátira / Costumbrismo</option>
+                    <option value="Sátira / Humor Social">Sátira / Humor Social</option>
+                    <option value="Romance Erótico / Deseo">Romance Erótico / Deseo</option>
+                    <option value="Romance / Desamor">Romance / Desamor</option>
+                    <option value="Crisis Existencial / Social">Crisis Existencial / Social</option>
+                    <option value="Meta-poesía / Identidad">Meta-poesía / Identidad</option>
+                    <option value="Melancolía / Crítica Urbana">Melancolía / Crítica Urbana</option>
+                    <option value="Despecho / Desamor">Despecho / Desamor</option>
+                    <option value="Relación Paterna / Trauma">Relación Paterna / Trauma</option>
+                    <option value="Melancolía / Compañerismo">Melancolía / Compañerismo</option>
+                    <option value="Romance / Infidelidad">Romance / Infidelidad</option>
+                    <option value="Crítica Social / Nihilismo">Crítica Social / Nihilismo</option>
+                    <option value="Reflexión / Hermandad">Reflexión / Hermandad</option>
+                    <option value="Confesional / Desahogo">Confesional / Desahogo</option>
+                    <option value="Romance Erótico / Deseo">Romance Erótico / Deseo</option>
+                    <option value="Crisis / Existencial">Crisis / Existencial</option>
+                    <option value="Desamor / Resignación">Desamor / Resignación</option>
+                    <option value="Melancolía / Desamor">Melancolía / Desamor</option>
+                    <option value="Reflexión / Juventud">Reflexión / Juventud</option>
+                    <option value="Desencanto / Intimidad">Desencanto / Intimidad</option>
+                    <option value="Rutina / Escape">Rutina / Escape</option>
+                    <option value="Psicosis / Despecho Social">Psicosis / Despecho Social</option>
+                    <option value="Fe / Crisis Espiritual">Fe / Crisis Espiritual</option>   
+                    <option value="Desamor / Superación">Desamor / Superación</option> 
+                    <option value="Juventud / Cruda Realidad">Juventud / Cruda Realidad</option>
+                    <option value="Melancolía / Ausencia">Melancolía / Ausencia</option>
+                    <option value="Nostalgia / Recuerdos">Nostalgia / Recuerdos</option>
+                    <option value="Crisis / Anclaje">Crisis / Anclaje</option>
+                    <option value="Reflexión / Crisis de Identidad">Reflexión / Crisis de Identidad</option>
+                    <option value="Psicológico / Crisis de Identidad">Psicológico / Crisis de Identidad</option>
+                    <option value="Diálogo Lírico / Desamor">Diálogo Lírico / Desamor</option>
+                    <option value="Desengaño / Relaciones Romanticas">Desengaño / Relaciones Romanticas</option>
+                    <option value="Desahogo / Remordimiento">Desahogo / Remordimiento</option>
+                    <option value="Romance / Devoción">Romance / Devoción</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="contenedor-poemas">
+            <!-- JS inyectará los poemas aquí -->
+        </div>
+    </section>
+
+    <!-- SECCIÓN 3: SOBRE MÍ -->
+    <section id="sobre-mi" class="seccion-contenido container">
+        <div class="sobre-mi-grid">
+            <div class="autor-imagen">
+                <!-- Coloca aquí una foto tuya o una imagen artística abstracta -->
+                <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=600" alt="Escritor">
+            </div>
+            <div class="autor-texto">
+                <h2>Detrás de la Pluma</h2>
+                <p>Bienvenido a mi rincón literario. Este espacio nace de la necesidad de compilar más de una década de escrituras, pensamientos desvelados y emociones capturadas en papel.</p>
+                <p>Cada poema aquí publicado representa un fragmento del tiempo, un espejo del alma y una invitación a mirar de cerca las grietas de la cotidianidad.</p>
+                <div class="firma">Tu Firma Aquí</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de Página Premium -->
+    <footer>
+        <p>&copy; 2026 Hernan Rodriguez Salazar. Todos los derechos reservados.</p>
+        <p class="footer-sub">Creado con alma y código.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
