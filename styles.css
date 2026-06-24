@@ -333,3 +333,80 @@ footer {
     color: var(--texto-secundario);
     transition: var(--transicion);
 }
+/* --- ADAPTACIÓN A MÓVILES (RESPONSIVE DESIGN) --- */
+@media (max-width: 768px) {
+    /* Reducimos los márgenes generales */
+    .container {
+        padding: 60px 15px;
+    }
+
+    /* 1. Menú de navegación móvil */
+    .navbar {
+        padding: 15px 20px;
+        flex-direction: column; /* Pone el logo arriba y los links abajo */
+        gap: 12px;
+        position: relative; /* Evita que tape contenido en pantallas mini */
+    }
+
+    .nav-derecha {
+        gap: 15px;
+        flex-direction: column-reverse; /* El botón de tema y links se acomodan mejor */
+        width: 100%;
+        align-items: center;
+    }
+
+    .nav-links {
+        gap: 15px;
+    }
+
+    .nav-link {
+        font-size: 0.8rem;
+    }
+
+    /* 2. Pantalla de inicio en celulares */
+    .hero-texto h1 {
+        font-size: 2.2rem; /* Texto más pequeño para que no se corte */
+    }
+
+    .hero-frase {
+        font-size: 1.1rem;
+    }
+
+    .btn-elegante {
+        padding: 12px 30px;
+        width: 100%; /* El botón ocupa todo el ancho disponible */
+    }
+
+    /* 3. Buscador y Filtros */
+    .filtros-container {
+        flex-direction: column; /* El buscador va arriba y el selector de categoría abajo */
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .filtros-container input {
+        width: 100%; /* Ocupan todo el ancho del celular */
+    }
+
+    /* 4. Lista de poemas */
+    .tarjeta-poema-min {
+        padding: 15px 20px;
+        flex-direction: column; /* Título arriba, categoría abajo */
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .tarjeta-poema-min:hover {
+        transform: translateY(-2px); /* En móvil es mejor mover hacia arriba que a la derecha */
+    }
+
+    /* 5. Sección Sobre Mí */
+    .sobre-mi-grid {
+        grid-template-columns: 1fr; /* Rompe las dos columnas y pone la foto arriba del texto */
+        gap: 30px;
+    }
+
+    .autor-imagen img {
+        height: 350px; /* Foto un poco más baja para no obligar a hacer tanto scroll */
+    }
+}
