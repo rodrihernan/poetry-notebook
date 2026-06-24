@@ -1,0 +1,359 @@
+/* Variables de diseño: Modo Claro y Modo Oscuro */
+:root {
+    --bg-principal: #f6f3eb; /* Papel hueso/editorial */
+    --bg-tarjeta: #ffffff;
+    --texto-principal: #1a1513;
+    --texto-secundario: #5a504a;
+    --color-oro: #af8949; /* Dorado elegante */
+    --color-oro-hover: #cb9b4c;
+    --borde: #eae5d9;
+    --shadow: rgba(43, 38, 35, 0.04);
+    --transicion: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+[data-theme="dark"] {
+    --bg-principal: #121212; /* Negro profundo */
+    --bg-tarjeta: #1a1a1a;    /* Gris oscuro para tarjetas */
+    --texto-principal: #e5dfd9; /* Blanco hueso suave */
+    --texto-secundario: #a39990;
+    --color-oro: #dfb76c;
+    --color-oro-hover: #f1cb81;
+    --borde: #2c2a26;
+    --shadow: rgba(0, 0, 0, 0.5);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-principal);
+    color: var(--texto-principal);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.7;
+    transition: var(--transicion);
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 80px 20px;
+}
+
+/* --- BARRA DE NAVEGACIÓN --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--bg-principal);
+    box-shadow: 0 1px 0 var(--borde);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    z-index: 1000;
+    transition: var(--transicion);
+}
+
+.nav-logo {
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    letter-spacing: 2px;
+    font-size: 1.1rem;
+    color: var(--color-oro);
+}
+
+.nav-derecha {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--texto-secundario);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: var(--transicion);
+    font-weight: 400;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--color-oro);
+}
+
+/* --- BOTÓN MODO OSCURO --- */
+.btn-tema {
+    background: none;
+    border: 1px solid var(--borde);
+    color: var(--texto-principal);
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: var(--transicion);
+}
+
+.btn-tema:hover {
+    border-color: var(--color-oro);
+    color: var(--color-oro);
+}
+
+/* --- SECCIONES --- */
+.seccion-contenido {
+    display: none;
+    padding-top: 60px;
+}
+
+.seccion-contenido.active {
+    display: block;
+    animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- PANTALLA DE INICIO (HERO) CON IMAGEN --- */
+.hero-container {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-image: url('https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?q=80&w=1200'); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(246, 243, 235, 0.85);
+    transition: var(--transicion);
+    z-index: 1;
+}
+
+[data-theme="dark"] .hero-overlay {
+    background: rgba(18, 18, 18, 0.88);
+}
+
+.hero-texto {
+    position: relative;
+    max-width: 750px;
+    padding: 20px;
+    z-index: 10;
+}
+
+.hero-sub {
+    font-family: 'Cinzel', serif;
+    color: var(--color-oro);
+    letter-spacing: 4px;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 20px;
+}
+
+.hero-texto h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 3.5rem;
+    margin-bottom: 25px;
+    letter-spacing: -1px;
+    color: var(--texto-principal);
+}
+
+.hero-frase {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--texto-secundario);
+    margin-bottom: 40px;
+}
+
+.btn-elegante {
+    position: relative;
+    z-index: 20;
+    background: transparent;
+    border: 1px solid var(--texto-principal);
+    color: var(--texto-principal);
+    padding: 14px 40px;
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: var(--transicion);
+    margin-top: 20px;
+}
+
+.btn-elegante:hover {
+    background: var(--texto-principal);
+    color: var(--bg-principal);
+    border-color: var(--texto-principal);
+}
+
+/* --- BUSCADOR Y FILTROS --- */
+.seccion-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.seccion-header h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    color: var(--texto-principal);
+}
+
+.seccion-header p {
+    color: var(--texto-secundario);
+}
+
+.filtros-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.filtros-container input, .filtros-container select {
+    padding: 12px 20px;
+    border: 1px solid var(--borde);
+    background: var(--bg-tarjeta);
+    color: var(--texto-principal);
+    font-family: 'Inter', sans-serif;
+    border-radius: 4px;
+    outline: none;
+    transition: var(--transicion);
+}
+
+.filtros-container input { width: 350px; }
+.filtros-container input:focus, .filtros-container select:focus {
+    border-color: var(--color-oro);
+}
+
+/* --- CATÁLOGO DE TÍTULOS --- */
+#contenedor-poemas {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.tarjeta-poema-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.tarjeta-poema-min {
+    background: var(--bg-tarjeta);
+    padding: 22px 35px;
+    border: 1px solid var(--borde);
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px var(--shadow);
+    transition: var(--transicion);
+}
+
+.tarjeta-poema-min:hover {
+    border-color: var(--color-oro);
+    transform: translateX(6px);
+    box-shadow: 0 6px 16px var(--shadow);
+}
+
+.tarjeta-poema-min h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--texto-principal);
+}
+
+.meta-poema {
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    color: var(--color-oro);
+    text-transform: uppercase;
+}
+
+/* --- SECCIÓN SOBRE MÍ --- */
+.sobre-mi-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.autor-imagen img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border: 1px solid var(--borde);
+    padding: 15px;
+    background: var(--bg-tarjeta);
+    transition: var(--transicion);
+}
+
+.autor-texto h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    color: var(--texto-principal);
+}
+
+.autor-texto p {
+    margin-bottom: 20px;
+    color: var(--texto-secundario);
+}
+
+.firma {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.8rem;
+    margin-top: 30px;
+    color: var(--color-oro);
+}
+
+/* --- FOOTER --- */
+footer {
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid var(--borde);
+    background-color: var(--bg-tarjeta);
+    font-size: 0.85rem;
+    color: var(--texto-secundario);
+    transition: var(--transicion);
+}
+
+/* --- ADAPTACIÓN A MÓVILES (RESPONSIVE DESIGN) --- */
+@media (max-width: 768px) {
+    .container { padding: 60px 15px; }
+    .navbar { padding: 15px 20px; flex-direction: column; gap: 12px; position: relative; }
+    .nav-derecha { gap: 15px; flex-direction: column-reverse; width: 100%; align-items: center; }
+    .nav-links { gap: 15px; }
+    .nav-link { font-size: 0.8rem; }
+    .hero-texto h1 { font-size: 2.2rem; }
+    .hero-frase { font-size: 1.1rem; }
+    .btn-elegante { padding: 12px 30px; width: 100%; }
+    .filtros-container { flex-direction: column; width: 100%; padding: 0 10px; }
+    .filtros-container input { width: 100%; }
+    .tarjeta-poema-min { padding: 15px 20px; flex-direction: column; align-items: flex-start; gap: 8px; }
+    .tarjeta-poema-min:hover { transform: translateY(-2px); }
+    .sobre-mi-grid { grid-template-columns: 1fr; gap: 30px; }
+    .autor-imagen img { height: 350px; }
+}

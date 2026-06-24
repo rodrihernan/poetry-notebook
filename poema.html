@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leyendo Poema</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Variables de diseño idénticas a la página principal */
+        :root {
+            --bg-principal: #f6f3eb; /* Papel hueso */
+            --texto-principal: #1a1513;
+            --color-oro: #af8949;
+            --fuente-poema: 'Playfair Display', serif;
+            --fuente-interfaz: 'Inter', sans-serif;
+        }
+
+        [data-theme="dark"] {
+            --bg-principal: #121212; /* Negro profundo */
+            --texto-principal: #e5dfd9; /* Blanco hueso suave */
+            --color-oro: #dfb76c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-principal);
+            color: var(--texto-principal);
+            font-family: var(--fuente-interfaz);
+            line-height: 1.8;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        /* Contenedor enfocado en la lectura zen */
+        .pantalla-lectura {
+            max-width: 650px;
+            margin: 80px auto;
+            padding: 0 25px;
+        }
+
+        /* Botón cerrar minimalista */
+        .btn-volver {
+            background: none;
+            border: none;
+            color: var(--color-oro);
+            cursor: pointer;
+            font-family: var(--fuente-interfaz);
+            font-size: 0.9rem;
+            margin-bottom: 50px;
+            display: inline-block;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-volver:hover {
+            transform: translateX(-4px);
+        }
+
+        .titulo-lectura {
+            font-family: var(--fuente-poema);
+            font-size: 2.6rem;
+            font-weight: 400;
+            line-height: 1.3;
+            margin-bottom: 12px;
+            color: var(--texto-principal);
+        }
+
+        .meta-poema {
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            color: var(--color-oro);
+            text-transform: uppercase;
+            margin-bottom: 45px;
+        }
+
+        /* El templo del poema: respeta saltos de línea y espacios de tus estrofas */
+        .contenido-lectura {
+            font-family: var(--fuente-poema);
+            font-size: 1.25rem;
+            color: var(--texto-principal);
+            white-space: pre-wrap; /* Clave para pintar los Arrays de versos de forma natural */
+            border: none;
+            background: none;
+        }
+
+        /* Ajuste fino para celulares */
+        @media (max-width: 768px) {
+            .pantalla-lectura {
+                margin: 40px auto;
+            }
+            .titulo-lectura {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="pantalla-lectura">
+        <a href="#" class="btn-volver" onclick="window.close(); return false;">← Cerrar pestaña</a>
+        
+        <h1 id="poema-titulo" class="titulo-lectura">Cargando...</h1>
+        <div id="poema-categoria" class="meta-poema"></div>
+        
+        <article id="poema-contenido" class="contenido-lectura">
+            Espere un momento...
+        </article>
+    </main>
+
+    <script>
+        // Sincronizar el Modo Oscuro antes de que el usuario vea parpadear la pantalla
+        const temaGuardado = localStorage.getItem('tema');
+        if (temaGuardado === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+
+        // Lógica para capturar el ID de la URL y volcar el poema
+        async function cargarPoemaIndividual() {
+            try {
+                const parametros = new URLSearchParams(window.location.search);
+                const idPoema = parseInt(parametros.get('id'));
+
+                const respuesta = await fetch('./poemas.json');
+                const poemas = await respuesta.json();
+
+                const poemaEncontrado = poemas.find(p => p.id === idPoema);
+
+                if (poemaEncontrado) {
+                    document.title = `${poemaEncontrado.titulo} | Mi Antología`;
+                    document.getElementById('poema-titulo').innerText = poemaEncontrado.titulo;
+                    document.getElementById('poema-categoria').innerText = poemaEncontrado.categoria;
+                    
+                    // Si el contenido viene estructurado como lista de renglones (Array)
+                    if (Array.isArray(poemaEncontrado.contenido)) {
+                        document.getElementById('poema-contenido').innerText = poemaEncontrado.contenido.join('\n');
+                    } else {
+                        // Por si acaso quedó alguno viejo en texto plano largo
+                        document.getElementById('poema-contenido').innerText = poemaEncontrado.contenido;
+                    }
+                } else {
+                    document.getElementById('poema-titulo').innerText = "Poema no encontrado";
+                    document.getElementById('poema-contenido').innerText = "El poema que buscas no existe en el archivo.";
+                }
+            } catch (error) {
+                console.error("Error al cargar el poema:", error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', cargarPoemaIndividual);
+    </script>
+</body>
+</html>
